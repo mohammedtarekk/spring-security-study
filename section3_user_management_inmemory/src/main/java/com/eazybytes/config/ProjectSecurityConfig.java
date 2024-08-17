@@ -35,12 +35,14 @@ public class ProjectSecurityConfig {
         UserDetails admin = User.withUsername("admin")
                             .password("{bcrypt}$2a$12$88.f6upbBvy0okEa7OfHFuorV29qeK.sVbB9VQ6J6dWM1bW6Qef8m")
                             .authorities("admin").build();
+        Integer k;
         return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        return new BCryptPasswordEncoder(); // returns a specific encoder from my choice
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder(); // returns the default recommended encoder of spring security
     }
 
     /**
